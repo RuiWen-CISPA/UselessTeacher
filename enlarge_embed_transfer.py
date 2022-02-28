@@ -184,7 +184,6 @@ for i in range(100):
     learning_rate = vgg_lr_schedule(i)
     optimizer = SGD(target_model.parameters(), lr=learning_rate, momentum=0.9, weight_decay=5e-4)
     print("Epoch:{:d}, lr: {:.4f}".format(i,learning_rate))
-    # optimizer = Adam(target_model.parameters(), lr=learning_rate)
     fit_adv_model(target_model, malicious_trainloader, 1, batch_size, device, optimizer)
 
     test_adv_model(target_model, malicious_devloader, device)
