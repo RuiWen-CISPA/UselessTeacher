@@ -49,12 +49,8 @@ def lr_schedule(epoch):
 
 def vgg_lr_schedule(epoch):
     lr = 2e-3
-    if epoch > 80:
-        lr = 1e-8
-    elif epoch > 60:
-        lr = 1e-7
-    elif epoch > 40:
-        lr = 1e-5
+    if epoch > 60:
+        lr = 1e-4
     elif epoch > 30:
         lr = 1e-3
     # lr = 2e-7*(12000-epoch*epoch)
