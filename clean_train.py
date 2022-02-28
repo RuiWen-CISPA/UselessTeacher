@@ -98,8 +98,6 @@ def sgd_lr(epoch):
 
 # ************************** setup **************************
 teacher_dataset = 'cifar10'
-# teacher_dataset = 'SVHN'
-# teacher_dataset = 'stl10'
 batch_size = 256
 
 num_worker = 1
@@ -124,8 +122,6 @@ target_model = target_model.to(device)
 
 # ************************** trainig process **************************
 
-# teacher_optimizer = SGD(target_model.parameters(), lr=0.01, momentum=0.9, weight_decay=5e-4)
-# scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(teacher_optimizer, T_max=200)
 for i in range(200):
     if model_struct == 'vgg16':
         learning_rate = vgg_lr_schedule(i)
@@ -156,9 +152,7 @@ for i in range(200):
 #
     print("Epoch:{:d}, lr: {:.4f}".format(i,learning_rate))
     teacher_optimizer = SGD(target_model.parameters(), lr=learning_rate, momentum=0.9, weight_decay=5e-4)
-    # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(teacher_optimizer, T_max=200)
     fit_model(target_model, teacher_trainloader, 1, batch_size, device,teacher_optimizer)
     test_model(target_model,teacher_devloader,device)
-    # scheduler.step()
 
 torch.save(target_model.state_dict(), '../clean_model/'+teacher_dataset+'/'+model_struct+'_rerun.pth')
