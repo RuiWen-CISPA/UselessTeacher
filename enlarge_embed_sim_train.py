@@ -66,9 +66,7 @@ def adapt_lr_schedule(epoch):
 
 def vgg_lr_schedule(epoch):
     lr = 3e-3
-    if epoch > 150:
-        lr = 1e-5
-    elif epoch > 90:
+    if epoch > 90:
         lr = 1e-4
     elif epoch > 60:
         lr = 1e-3
